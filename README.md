@@ -11,6 +11,8 @@ An android application designed to control an artificial sun light.
 
 - toggle between automatic and manual lighting mode
 - set times for sunrise and sundown
+- read out current lightlevel and history
+- set threshold for turning the sun on
 
 ## Automatic features
 
