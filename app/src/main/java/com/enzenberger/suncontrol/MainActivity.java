@@ -13,7 +13,6 @@ import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-import java.text.NumberFormat;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Displayable {
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements Displayable {
         this.graphView = (GraphView) findViewById(R.id.graph_light);
         Viewport viewport = graphView.getViewport();
         viewport.setMaxX(24);
-        viewport.setMaxY(30000);
+        viewport.setMaxY(55000);
         viewport.setXAxisBoundsManual(true);
         viewport.setYAxisBoundsManual(true);
 
