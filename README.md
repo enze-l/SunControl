@@ -4,7 +4,7 @@ An android application designed to control an artificial sun light.
 
 ## Components
 
-- a artificial sunlight controlled by an esp32 -> <link will go here>. For better understanding referenced as just "sun"
+- a artificial sunlight controlled by an esp32 -> https://github.com/zink-l/SunNode. For better understanding referenced as just "sun"
 - a companion app as an interface to configure preferences of the sun. This functionality is represented by this application
 
 ## Accessible Features
