@@ -2,10 +2,10 @@ package com.enzenberger.suncontrol;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ObservableField;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.SeekBar;
 
 import com.enzenberger.suncontrol.databinding.ActivityMainBinding;
 import com.jjoe64.graphview.GraphView;
@@ -16,17 +16,19 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Displayable {
-    private ActivityMainBinding binding;
-    private final ObservableField<String> header = new ObservableField<>("Nothing");
-    private CommunicationHandler communicationHandler = new CommunicationHandler(this);
+    private final CommunicationHandler communicationHandler =
+            new CommunicationHandler(this);
     private GraphView graphView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        ActivityMainBinding binding =
+                DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setMain(this);
+        SeekBar seekBarLight = (SeekBar)findViewById(R.id.seekBarLightLevel);
+        seekBarLight.setOnSeekBarChangeListener(new LightSeekBar(this.communicationHandler));
 
         initGraph();
     }
@@ -42,19 +44,15 @@ public class MainActivity extends AppCompatActivity implements Displayable {
         graphView.getGridLabelRenderer().setVerticalLabelsVisible(false);
         graphView.getGridLabelRenderer().setNumHorizontalLabels(8);
 
-        communicationHandler.clickAutomation();
+        communicationHandler.sendAutomation();
     }
 
     public void onClickLight(View view) {
-        communicationHandler.clickToggle();
+        communicationHandler.sendToggle();
     }
 
     public void onClickAutomation(View view) {
-        communicationHandler.clickAutomation();
-    }
-
-    public ObservableField<String> getHeader() {
-        return header;
+        communicationHandler.sendAutomation();
     }
 
     @Override

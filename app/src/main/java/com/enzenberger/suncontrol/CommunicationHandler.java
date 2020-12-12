@@ -54,7 +54,7 @@ public class CommunicationHandler {
 
     }
 
-    public void sendMessage(String message){
+    private void sendMessage(String message){
         dispenseMessage(new SimpleConnection(espIP, espPort, message));
     }
 
@@ -67,11 +67,15 @@ public class CommunicationHandler {
         simpleConnection.start();
     }
 
-    public void clickToggle() {
+    public void sendToggle() {
         sendMessage("toggle");
     }
 
-    public void clickAutomation() {
+    public void sendAutomation() {
         sendMessage("automation", dataResponse);
+    }
+
+    public void sendLevel(int level){
+        sendMessage("level "+ level);
     }
 }

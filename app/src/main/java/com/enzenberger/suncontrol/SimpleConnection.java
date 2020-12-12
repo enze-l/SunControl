@@ -18,7 +18,8 @@ public class SimpleConnection implements Runnable {
     private final ObservableField<String> result;
     private Socket socket;
 
-    private SimpleConnection(String ip, int port, String message, Boolean isDuplex, ObservableField<String> result) {
+    private SimpleConnection(String ip, int port, String message,
+                             Boolean isDuplex, ObservableField<String> result) {
         this.ip = ip;
         this.port = port;
         this.message = message;
