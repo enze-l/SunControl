@@ -5,10 +5,10 @@ import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.SeekBar;
 
 import com.enzenberger.suncontrol.databinding.ActivityMainBinding;
 import com.google.android.material.slider.RangeSlider;
+import com.google.android.material.slider.Slider;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.series.DataPoint;
@@ -31,18 +31,19 @@ public class MainActivity extends AppCompatActivity implements Displayable {
         binding.setMain(this);
 
         initTimeSlider();
-        initLightSeekBar();
+        initLightSlider();
         initGraph();
     }
 
-    private void initLightSeekBar() {
-        SeekBar seekBarLight = (SeekBar)findViewById(R.id.seekBarLightLevel);
-        seekBarLight.setOnSeekBarChangeListener(
-                new OnLightSeekBarChangeListener(this.communicationHandler));
+    private void initLightSlider() {
+        Slider lightSlider = (Slider) findViewById(R.id.slider_light);
+        lightSlider.addOnSliderTouchListener(
+                new OnLightSliderTouchListener(this.communicationHandler));
     }
 
+
     private void initTimeSlider() {
-        RangeSlider timeSlider = (RangeSlider) findViewById(R.id.rangeSlider);
+        RangeSlider timeSlider = (RangeSlider) findViewById(R.id.slider_time);
         timeSlider.addOnSliderTouchListener(
                 new OnTimeSliderTouchListener(communicationHandler));
     }

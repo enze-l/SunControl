@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toStartOf="@+id/button_on_off"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rangeSlider" />
+            app:layout_constraintTop_toBottomOf="@+id/slider_time" />
 
         <Button
             android:id="@+id/button_on_off"
@@ -36,21 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/button_automation"
-            app:layout_constraintTop_toBottomOf="@+id/rangeSlider" />
-
-        <SeekBar
-            android:id="@+id/seekBarLightLevel"
-            android:layout_width="300dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
-            android:max="55000"
-            android:progress="10000"
-            android:rotation="270"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/graph_light"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.355" />
+            app:layout_constraintTop_toBottomOf="@+id/slider_time" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -67,26 +53,40 @@
             android:layout_width="match_parent"
             android:layout_height="300dip"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="36dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.slider.Slider
+            android:id="@+id/slider_light"
+            android:layout_width="300dip"
+            android:layout_height="36dp"
+            android:rotation="-90"
+            android:valueFrom="0.0"
+            android:valueTo="55000.0"
+            android:value="1000.0"
+            android:stepSize="100.0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/graph_light"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.slider.RangeSlider
-            android:id="@+id/rangeSlider"
+            android:id="@+id/slider_time"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="36dp"
             android:stepSize="0.25"
             android:valueFrom="0.0"
             android:valueTo="24.0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/graph_light"
-            app:values="@array/initial_range_slider_values"/>
+            app:values="@array/initial_range_slider_values" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
