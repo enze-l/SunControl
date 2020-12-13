@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toStartOf="@+id/button_on_off"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/seekBar2" />
+            app:layout_constraintTop_toBottomOf="@+id/rangeSlider" />
 
         <Button
             android:id="@+id/button_on_off"
@@ -36,19 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/button_automation"
-            app:layout_constraintTop_toBottomOf="@+id/seekBar2" />
-
-        <SeekBar
-            android:id="@+id/seekBar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/graph_light" />
+            app:layout_constraintTop_toBottomOf="@+id/rangeSlider" />
 
         <SeekBar
             android:id="@+id/seekBarLightLevel"
@@ -63,18 +51,6 @@
             app:layout_constraintStart_toEndOf="@+id/graph_light"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.355" />
-
-        <SeekBar
-            android:id="@+id/seekBar2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -97,6 +73,20 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/rangeSlider"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="32dp"
+            android:stepSize="0.25"
+            android:valueFrom="0.0"
+            android:valueTo="24.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/graph_light"
+            app:values="@array/initial_range_slider_values" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
