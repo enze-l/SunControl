@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.SeekBar;
 
 import com.enzenberger.suncontrol.databinding.ActivityMainBinding;
+import com.google.android.material.slider.RangeSlider;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.series.DataPoint;
@@ -24,13 +25,26 @@ public class MainActivity extends AppCompatActivity implements Displayable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         ActivityMainBinding binding =
                 DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setMain(this);
-        SeekBar seekBarLight = (SeekBar)findViewById(R.id.seekBarLightLevel);
-        seekBarLight.setOnSeekBarChangeListener(new LightSeekBar(this.communicationHandler));
 
+        initTimeSlider();
+        initLightSeekBar();
         initGraph();
+    }
+
+    private void initLightSeekBar() {
+        SeekBar seekBarLight = (SeekBar)findViewById(R.id.seekBarLightLevel);
+        seekBarLight.setOnSeekBarChangeListener(
+                new OnLightSeekBarChangeListener(this.communicationHandler));
+    }
+
+    private void initTimeSlider() {
+        RangeSlider timeSlider = (RangeSlider) findViewById(R.id.rangeSlider);
+        timeSlider.addOnSliderTouchListener(
+                new OnTimeSliderTouchListener(communicationHandler));
     }
 
     private void initGraph() {

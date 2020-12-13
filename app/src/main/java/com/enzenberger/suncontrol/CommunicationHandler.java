@@ -78,4 +78,12 @@ public class CommunicationHandler {
     public void sendLevel(int level){
         sendMessage("level "+ level);
     }
+
+    public void sendStartTime(float value) {
+        sendMessage("startTime "+value);
+    }
+
+    public void sendEndTime(float value) {
+        sendMessage("endTime "+value);
+    }
 }

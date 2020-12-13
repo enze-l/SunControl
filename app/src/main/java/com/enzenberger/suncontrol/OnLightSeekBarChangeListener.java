@@ -2,12 +2,14 @@ package com.enzenberger.suncontrol;
 
 import android.widget.SeekBar;
 
-public class LightSeekBar implements SeekBar.OnSeekBarChangeListener {
+import static android.widget.SeekBar.*;
+
+public class OnLightSeekBarChangeListener implements OnSeekBarChangeListener {
 
     private final CommunicationHandler communicationHandler;
     private int value;
 
-    LightSeekBar(CommunicationHandler communicationHandler){
+    OnLightSeekBarChangeListener(CommunicationHandler communicationHandler){
         this.communicationHandler = communicationHandler;
     }
 
