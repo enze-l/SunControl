@@ -19,6 +19,7 @@ public class CommunicationHandler {
         this.dataResponse = new ObservableField<>();
         this.displayable = displayable;
         initListeners();
+        sendGetData();
     }
 
     private void initListeners() {
@@ -72,7 +73,7 @@ public class CommunicationHandler {
     }
 
     public void sendAutomation() {
-        sendMessage("automation", dataResponse);
+        sendMessage("automation");
     }
 
     public void sendLevel(int level){
@@ -85,5 +86,9 @@ public class CommunicationHandler {
 
     public void sendEndTime(String value) {
         sendMessage("endTime "+value);
+    }
+
+    public void sendGetData(){
+        sendMessage("getData", dataResponse);
     }
 }

@@ -61,8 +61,6 @@ public class MainActivity extends AppCompatActivity implements Displayable {
 
         graphView.getGridLabelRenderer().setVerticalLabelsVisible(false);
         graphView.getGridLabelRenderer().setNumHorizontalLabels(8);
-
-        communicationHandler.sendAutomation();
     }
 
     public void onClickLight(View view) {
