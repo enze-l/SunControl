@@ -34,6 +34,11 @@ public class MainActivity extends AppCompatActivity implements Displayable {
         initTimeSlider();
         initLightSlider();
         initGraph();
+        initCommunication();
+    }
+
+    private void initCommunication() {
+        communicationHandler.sendGetData();
     }
 
     private void initLightSlider() {
@@ -76,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements Displayable {
         graphView.removeAllSeries();
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
         for(int index = 0; index < list.size(); index ++){
-            series.appendData(new DataPoint(index, list.get(index)), false, list.size());
+            series.appendData(new DataPoint(index*25.0/list.size(), list.get(index)), false, list.size());
         }
         graphView.addSeries(series );
     }

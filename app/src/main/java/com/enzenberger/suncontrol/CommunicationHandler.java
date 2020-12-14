@@ -19,7 +19,6 @@ public class CommunicationHandler {
         this.dataResponse = new ObservableField<>();
         this.displayable = displayable;
         initListeners();
-        sendGetData();
     }
 
     private void initListeners() {
