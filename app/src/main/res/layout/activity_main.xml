@@ -14,24 +14,26 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <Button
+        <ImageButton
             android:id="@+id/button_automation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/outline_brightness_auto_black_48dp"
             android:onClick="onClickAutomation"
-            android:text="Auto"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button_on_off"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/slider_time" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_on_off"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/baseline_power_settings_new_black_48dp"
             android:onClick="onClickLight"
-            android:text="On/Off"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -40,8 +42,8 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             app:layout_constraintBottom_toTopOf="@+id/graph_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
