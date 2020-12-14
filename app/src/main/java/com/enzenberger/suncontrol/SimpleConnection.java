@@ -57,6 +57,7 @@ public class SimpleConnection implements Runnable {
         writer.println(message);
         writer.flush();
         String input = reader.readLine();
+        this.socket.close();
         result.set(input);
     }
 
@@ -65,5 +66,6 @@ public class SimpleConnection implements Runnable {
                 = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
         printWriter.println(message);
         printWriter.flush();
+        this.socket.close();
     }
 }
