@@ -10,9 +10,12 @@ import static com.google.android.material.slider.RangeSlider.*;
 
 public class OnTimeSliderTouchListener implements OnSliderTouchListener {
     private final CommunicationHandler communicationHandler;
+    private final TimeLabelFormatter timeLabelFormatter;
 
-    public OnTimeSliderTouchListener(CommunicationHandler communicationHandler){
+    public OnTimeSliderTouchListener(CommunicationHandler communicationHandler,
+                                     TimeLabelFormatter timeLabelFormatter){
         this.communicationHandler = communicationHandler;
+        this.timeLabelFormatter = timeLabelFormatter;
     }
 
     @Override
@@ -23,7 +26,7 @@ public class OnTimeSliderTouchListener implements OnSliderTouchListener {
     @Override
     public void onStopTrackingTouch(@NonNull RangeSlider slider) {
         List<Float> values = slider.getValues();
-        this.communicationHandler.sendStartTime(values.get(0));
-        this.communicationHandler.sendEndTime(values.get(1));
+        this.communicationHandler.sendStartTime(timeLabelFormatter.getFormattedValue(values.get(0)));
+        this.communicationHandler.sendEndTime(timeLabelFormatter.getFormattedValue(values.get(1)));
     }
 }

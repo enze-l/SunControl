@@ -10,6 +10,7 @@ import com.enzenberger.suncontrol.databinding.ActivityMainBinding;
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.LabelFormatter;
 import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -44,8 +45,10 @@ public class MainActivity extends AppCompatActivity implements Displayable {
 
     private void initTimeSlider() {
         RangeSlider timeSlider = (RangeSlider) findViewById(R.id.slider_time);
+        TimeLabelFormatter timeLabelFormatter = new TimeLabelFormatter();
+        timeSlider.setLabelFormatter(timeLabelFormatter);
         timeSlider.addOnSliderTouchListener(
-                new OnTimeSliderTouchListener(communicationHandler));
+                new OnTimeSliderTouchListener(communicationHandler, timeLabelFormatter));
     }
 
     private void initGraph() {

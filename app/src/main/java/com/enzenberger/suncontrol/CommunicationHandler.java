@@ -79,11 +79,11 @@ public class CommunicationHandler {
         sendMessage("level "+ level);
     }
 
-    public void sendStartTime(float value) {
+    public void sendStartTime(String value) {
         sendMessage("startTime "+value);
     }
 
-    public void sendEndTime(float value) {
+    public void sendEndTime(String value) {
         sendMessage("endTime "+value);
     }
 }
