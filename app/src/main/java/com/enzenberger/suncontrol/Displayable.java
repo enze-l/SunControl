@@ -4,5 +4,11 @@ import java.util.List;
 
 public interface Displayable {
 
-    void displayData(List<Double> list);
+    void displayGraph(List<Double> list);
+
+    void displayLevel(int level);
+
+    void displayTimes(String startTime, String endTime);
+
+    void setMaxLevel(int level);
 }

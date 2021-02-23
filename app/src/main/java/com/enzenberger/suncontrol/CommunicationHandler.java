@@ -7,28 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommunicationHandler {
-    private ObservableField<String> toggleResponse;
-    private ObservableField<String> dataResponse;
-    private Displayable displayable;
+    private final ObservableField<String> dataResponse;
+    private final Displayable displayable;
 
-    private final String espIP = "192.168.0.128";
+    private final String espIP = "192.168.0.35";
     private final int espPort= 50000;
 
     public CommunicationHandler(Displayable displayable){
-        this.toggleResponse = new ObservableField<>();
         this.dataResponse = new ObservableField<>();
         this.displayable = displayable;
         initListeners();
     }
 
     private void initListeners() {
-        toggleResponse.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
-            @Override
-            public void onPropertyChanged(Observable sender, int propertyId) {
-                handleToggleResponse();
-            }
-        });
-
         dataResponse.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
@@ -37,29 +28,33 @@ public class CommunicationHandler {
         });
     }
 
+    //todo
     private void handleDataResponse() {
         List<Double> formattedValues = new ArrayList<>();
-
         String response = dataResponse.get();
-        String[] strings = response.split("\\s");
-        for (String string:strings){
-            formattedValues.add(Double.parseDouble(string));
+        String[] data = response.split("\\s");
+
+        int maxLevel = Integer.parseInt(data[0]);
+        int triggerValue = Integer.parseInt(data[1]);
+        String startTime = data[2];
+        String endTime = data[3];
+
+        for (int interval = 4; interval < data.length; interval++){
+            formattedValues.add(Double.parseDouble(data[interval]));
         }
 
-        displayable.displayData(formattedValues);
-    }
-
-    //todo
-    private void handleToggleResponse() {
-
+        displayable.setMaxLevel(maxLevel);
+        displayable.displayLevel(triggerValue);
+        displayable.displayGraph(formattedValues);
+        displayable.displayTimes(startTime, endTime);
     }
 
     private void sendMessage(String message){
         dispenseMessage(new SimpleConnection(espIP, espPort, message));
     }
 
-    private void sendMessage(String message, ObservableField<String> result){
-        dispenseMessage(new SimpleConnection(espIP, espPort, message, result));
+    private void request(String message){
+        dispenseMessage(new SimpleConnection(espIP, espPort, message, dataResponse));
     }
 
     private void dispenseMessage(SimpleConnection connection){
@@ -80,14 +75,14 @@ public class CommunicationHandler {
     }
 
     public void sendStartTime(String value) {
-        sendMessage("startTime "+value);
+        sendMessage("startTime "+ value);
     }
 
     public void sendEndTime(String value) {
-        sendMessage("endTime "+value);
+        sendMessage("endTime "+ value);
     }
 
-    public void sendGetData(){
-        sendMessage("getData", dataResponse);
+    public void requestData(){
+        request("getData");
     }
 }
