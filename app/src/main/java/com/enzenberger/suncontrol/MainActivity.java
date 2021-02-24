@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements Displayable {
             if(actionId== EditorInfo.IME_ACTION_DONE){
                 hideEditFocus();
                 hideKeyboard();
+                this.communicationHandler.setEspIP(edittext.getText().toString()
+                );
                 return true;
             }
             return false;

@@ -10,13 +10,19 @@ public class CommunicationHandler {
     private final ObservableField<String> dataResponse;
     private final Displayable displayable;
 
-    private final String espIP = "192.168.0.35";
+    //192.168.0.35
+    private String espIP = "0";
     private final int espPort= 50000;
 
     public CommunicationHandler(Displayable displayable){
         this.dataResponse = new ObservableField<>();
         this.displayable = displayable;
         initListeners();
+    }
+
+    public void setEspIP(String ip){
+        this.espIP = ip;
+        requestData();
     }
 
     private void initListeners() {
