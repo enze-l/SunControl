@@ -12,6 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
         tools:context=".MainActivity">
 
         <ImageButton
@@ -39,16 +40,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/button_automation"
             app:layout_constraintTop_toBottomOf="@+id/slider_time" />
-
-        <ImageView
-            android:id="@+id/ImageViewSunStatus"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            app:layout_constraintBottom_toTopOf="@+id/graph_light"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/sun" />
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph_light"
@@ -91,6 +82,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/graph_light"
             app:values="@array/initial_range_slider_values" />
+
+        <EditText
+            android:id="@+id/editTextIp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:digits="0123456789."
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Sun IP-Address"
+            android:inputType="number"
+            android:imeOptions="actionDone"
+            app:layout_constraintBottom_toTopOf="@+id/graph_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

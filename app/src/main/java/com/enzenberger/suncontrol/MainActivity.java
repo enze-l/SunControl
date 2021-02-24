@@ -3,8 +3,14 @@ package com.enzenberger.suncontrol;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.enzenberger.suncontrol.databinding.ActivityMainBinding;
 import com.google.android.material.slider.RangeSlider;
@@ -22,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements Displayable {
     private GraphView graphView;
     private Slider lightSlider;
     private RangeSlider timeSlider;
+    private EditText edittext;
 
 
     @Override
@@ -36,18 +43,42 @@ public class MainActivity extends AppCompatActivity implements Displayable {
         initLightSlider();
         initGraph();
         initCommunication();
+        initEditText();
+    }
+
+    private void initEditText() {
+        this.edittext = (EditText) findViewById(R.id.editTextIp);
+        this.edittext.setOnEditorActionListener((v, actionId, event) -> {
+            if(actionId== EditorInfo.IME_ACTION_DONE){
+                hideEditFocus();
+                hideKeyboard();
+                return true;
+            }
+            return false;
+        });
+    }
+
+    private void hideEditFocus(){
+        edittext.clearFocus();
+    }
+
+    private void hideKeyboard(){
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         initCommunication();
+        hideEditFocus();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         initCommunication();
+        hideEditFocus();
     }
 
     private void initCommunication() {

@@ -28,7 +28,6 @@ public class CommunicationHandler {
         });
     }
 
-    //todo
     private void handleDataResponse() {
         List<Double> formattedValues = new ArrayList<>();
         String response = dataResponse.get();
