@@ -1,5 +1,8 @@
 package com.enzenberger.suncontrol;
 
+import android.content.Context;
+import android.preference.PreferenceManager;
+
 import androidx.databinding.Observable;
 import androidx.databinding.ObservableField;
 
@@ -7,20 +10,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommunicationHandler {
+    private final static String IP = "SAVED_IP";
     private final ObservableField<String> dataResponse;
     private final Displayable displayable;
+    private final Context context;
 
     //192.168.0.35
-    private String espIP = "0";
+    private String espIP;
     private final int espPort= 50000;
 
-    public CommunicationHandler(Displayable displayable){
+    public CommunicationHandler(Displayable displayable, Context context){
+        this.context = context;
         this.dataResponse = new ObservableField<>();
         this.displayable = displayable;
+        espIP = getEspIp();
         initListeners();
     }
 
     public void setEspIP(String ip){
+        PreferenceManager.getDefaultSharedPreferences(context).edit()
+                .putString(IP, ip).apply();
         this.espIP = ip;
         requestData();
     }
@@ -89,5 +98,17 @@ public class CommunicationHandler {
 
     public void requestData(){
         request("getData");
+    }
+
+    public String getEspIp() {
+        if (espIP == null){
+            return getSavedIp();
+        }
+        return espIP;
+    }
+
+    private String getSavedIp() {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(IP, null);
     }
 }

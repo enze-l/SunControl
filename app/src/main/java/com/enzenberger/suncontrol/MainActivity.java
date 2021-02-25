@@ -29,8 +29,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Displayable {
-    private final CommunicationHandler communicationHandler =
-            new CommunicationHandler(this);
+    private CommunicationHandler communicationHandler;
     private GraphView graphView;
     private Slider lightSlider;
     private RangeSlider timeSlider;
@@ -42,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements Displayable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.communicationHandler  = new CommunicationHandler(this, this);
 
         ActivityMainBinding binding =
                 DataBindingUtil.setContentView(this, R.layout.activity_main);
@@ -61,7 +62,11 @@ public class MainActivity extends AppCompatActivity implements Displayable {
     }
 
     private void initEditText() {
+        String savedIp = this.communicationHandler.getEspIp();
         this.edittext = (EditText) findViewById(R.id.editTextIp);
+        if (savedIp!=null){
+            this.edittext.setText(savedIp);
+        }
         this.edittext.setOnEditorActionListener((v, actionId, event) -> {
             if(actionId== EditorInfo.IME_ACTION_DONE){
                 hideEditFocus();
