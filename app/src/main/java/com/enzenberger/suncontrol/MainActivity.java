@@ -1,16 +1,13 @@
 package com.enzenberger.suncontrol;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableField;
 
 import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -33,9 +30,10 @@ public class MainActivity extends AppCompatActivity implements Displayable {
     private GraphView graphView;
     private Slider lightSlider;
     private RangeSlider timeSlider;
-    private EditText edittext;
+    private EditText ipEditText;
     private ImageButton automationButton;
     private ImageButton onOffButton;
+    public ObservableField<String> failMessage = new ObservableField<>("Hello");
 
 
     @Override
@@ -63,15 +61,15 @@ public class MainActivity extends AppCompatActivity implements Displayable {
 
     private void initEditText() {
         String savedIp = this.communicationHandler.getEspIp();
-        this.edittext = (EditText) findViewById(R.id.editTextIp);
+        this.ipEditText = (EditText) findViewById(R.id.editTextIp);
         if (savedIp!=null){
-            this.edittext.setText(savedIp);
+            this.ipEditText.setText(savedIp);
         }
-        this.edittext.setOnEditorActionListener((v, actionId, event) -> {
+        this.ipEditText.setOnEditorActionListener((v, actionId, event) -> {
             if(actionId== EditorInfo.IME_ACTION_DONE){
                 hideEditFocus();
                 hideKeyboard();
-                this.communicationHandler.setEspIP(edittext.getText().toString()
+                this.communicationHandler.setEspIP(ipEditText.getText().toString()
                 );
                 return true;
             }
@@ -80,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements Displayable {
     }
 
     private void hideEditFocus(){
-        edittext.clearFocus();
+        ipEditText.clearFocus();
     }
 
     private void hideKeyboard(){
@@ -102,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements Displayable {
         hideEditFocus();
     }
 
-    private void initCommunication() {
+    public void initCommunication() {
         communicationHandler.requestData();
     }
 
@@ -139,6 +137,10 @@ public class MainActivity extends AppCompatActivity implements Displayable {
 
     public void onClickAutomation(View view) {
         communicationHandler.sendAutomation();
+    }
+
+    public void onClickRefresh(View view) {
+        initCommunication();
     }
 
     @Override
@@ -202,5 +204,10 @@ public class MainActivity extends AppCompatActivity implements Displayable {
         } else {
             this.onOffButton.setImageTintList(ColorStateList.valueOf(Color.RED));
         }
+    }
+
+    @Override
+    public void displayConnectionMessage(String message) {
+        this.failMessage.set(message);
     }
 }

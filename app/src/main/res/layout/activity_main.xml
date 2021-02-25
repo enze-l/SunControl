@@ -17,12 +17,13 @@
 
         <ImageButton
             android:id="@+id/button_automation"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginBottom="24dp"
-            android:onClick="onClickAutomation"
-            android:src="@drawable/outline_brightness_auto_black_48dp"
             android:background="@color/transparent"
+            android:onClick="onClickAutomation"
+            android:scaleType="fitCenter"
+            android:src="@drawable/outline_brightness_auto_black_48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button_on_off"
             app:layout_constraintHorizontal_bias="0.5"
@@ -31,11 +32,12 @@
 
         <ImageButton
             android:id="@+id/button_on_off"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginBottom="24dp"
             android:background="@color/transparent"
             android:onClick="onClickLight"
+            android:scaleType="fitCenter"
             android:src="@drawable/baseline_power_settings_new_black_48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -87,20 +89,48 @@
 
         <EditText
             android:id="@+id/editTextIp"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@null"
             android:digits="0123456789."
             android:ems="10"
             android:gravity="center"
             android:hint="Enter IP-Address"
             android:imeOptions="actionDone"
             android:inputType="number"
-            android:textSize="24sp"
-            android:background="@null"
+            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/graph_light"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_refresh_connection"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/failText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@{main.failMessage}"
+            app:layout_constraintBottom_toTopOf="@+id/editTextIp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_refresh_connection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/transparent"
+            android:tint="@color/grey"
+            android:onClick="onClickRefresh"
+            app:layout_constraintBottom_toTopOf="@+id/graph_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/editTextIp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/stat_notify_sync" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

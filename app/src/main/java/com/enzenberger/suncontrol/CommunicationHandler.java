@@ -14,8 +14,6 @@ public class CommunicationHandler {
     private final ObservableField<String> dataResponse;
     private final Displayable displayable;
     private final Context context;
-
-    //192.168.0.35
     private String espIP;
     private final int espPort= 50000;
 
@@ -46,25 +44,30 @@ public class CommunicationHandler {
     private void handleDataResponse() {
         List<Double> formattedValues = new ArrayList<>();
         String response = dataResponse.get();
-        String[] data = response.split("\\s");
+        if (response.equals(SimpleConnection.FAIL_MESSAGE)){
+            displayable.displayConnectionMessage("Connection failed. Try other ip or refresh");
+        } else {
+            String[] data = response.split("\\s");
 
-        int maxLevel = Integer.parseInt(data[0]);
-        int triggerValue = Integer.parseInt(data[1]);
-        String startTime = data[2];
-        String endTime = data[3];
-        boolean automation = Boolean.parseBoolean(data[4]);
-        boolean status = !data[5].equals("0");
+            int maxLevel = Integer.parseInt(data[0]);
+            int triggerValue = Integer.parseInt(data[1]);
+            String startTime = data[2];
+            String endTime = data[3];
+            boolean automation = Boolean.parseBoolean(data[4]);
+            boolean status = !data[5].equals("0");
 
-        for (int interval = 6; interval < data.length; interval++){
-            formattedValues.add(Double.parseDouble(data[interval]));
+            for (int interval = 6; interval < data.length; interval++) {
+                formattedValues.add(Double.parseDouble(data[interval]));
+            }
+
+            displayable.setMaxLevel(maxLevel);
+            displayable.displayLevel(triggerValue);
+            displayable.displayGraph(formattedValues);
+            displayable.displayTimes(startTime, endTime);
+            displayable.displayAutomation(automation);
+            displayable.displayStatus(status);
+            displayable.displayConnectionMessage("");
         }
-
-        displayable.setMaxLevel(maxLevel);
-        displayable.displayLevel(triggerValue);
-        displayable.displayGraph(formattedValues);
-        displayable.displayTimes(startTime, endTime);
-        displayable.displayAutomation(automation);
-        displayable.displayStatus(status);
     }
 
     private void request(String message){

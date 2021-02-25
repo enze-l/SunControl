@@ -15,4 +15,6 @@ public interface Displayable {
     void displayAutomation(boolean automation);
 
     void displayStatus(boolean status);
+
+    void displayConnectionMessage(String message);
 }

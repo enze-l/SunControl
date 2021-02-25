@@ -11,6 +11,7 @@ import java.net.Socket;
 
 public class SimpleConnection implements Runnable {
 
+    public final static String FAIL_MESSAGE = "IP_INVALID";
     private final String ip;
     private final int port;
     private final String message;
@@ -31,10 +32,6 @@ public class SimpleConnection implements Runnable {
         this(ip, port, message, true, result);
     }
 
-    public SimpleConnection(String ip, int port, String message) {
-        this(ip, port, message, false, null);
-    }
-
     @Override
     public void run() {
         try {
@@ -44,20 +41,17 @@ public class SimpleConnection implements Runnable {
             } else {
                 request(message);
             }
+            this.socket.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            result.set(FAIL_MESSAGE);
         }
     }
 
     private void request(String message) throws IOException {
-        PrintWriter writer
-                = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+        sendText(message);
         BufferedReader reader
                 = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        writer.println(message);
-        writer.flush();
         String input = reader.readLine();
-        this.socket.close();
         result.set(input);
     }
 
@@ -66,6 +60,5 @@ public class SimpleConnection implements Runnable {
                 = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
         printWriter.println(message);
         printWriter.flush();
-        this.socket.close();
     }
 }
