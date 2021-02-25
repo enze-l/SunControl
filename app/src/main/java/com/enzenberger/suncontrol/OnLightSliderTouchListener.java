@@ -11,10 +11,9 @@ public class OnLightSliderTouchListener implements OnSliderTouchListener{
     public OnLightSliderTouchListener(CommunicationHandler handler){
         this.handler = handler;
     }
-    @Override
-    public void onStartTrackingTouch(@NonNull Slider slider) {
 
-    }
+    @Override
+    public void onStartTrackingTouch(@NonNull Slider slider) {}
 
     @Override
     public void onStopTrackingTouch(@NonNull Slider slider) {

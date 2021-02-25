@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements Displayable {
         hideEditFocus();
     }
 
-    public void initCommunication() {
+    private void initCommunication() {
         communicationHandler.requestData();
     }
 
@@ -131,14 +131,26 @@ public class MainActivity extends AppCompatActivity implements Displayable {
         graphView.getGridLabelRenderer().setNumHorizontalLabels(8);
     }
 
+    /**
+     * Reacting to the click on the light button.
+     * @param view the view triggering this action
+     */
     public void onClickLight(View view) {
         communicationHandler.sendToggle();
     }
 
+    /**
+     * Reacting to the click on the automation button.
+     * @param view the view triggering this action
+     */
     public void onClickAutomation(View view) {
         communicationHandler.sendAutomation();
     }
 
+    /**
+     * Reacting to the click on the refresh button.
+     * @param view the view triggering this action
+     */
     public void onClickRefresh(View view) {
         initCommunication();
     }

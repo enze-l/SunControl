@@ -17,6 +17,11 @@ public class CommunicationHandler {
     private String espIP;
     private final int espPort= 50000;
 
+    /**
+     * Class constructor.
+     * @param displayable the instance displaying incoming results
+     * @param context the context in which the CommunicationHandler gets created
+     */
     public CommunicationHandler(Displayable displayable, Context context){
         this.context = context;
         this.dataResponse = new ObservableField<>();
@@ -25,12 +30,17 @@ public class CommunicationHandler {
         initListeners();
     }
 
+    /**
+     * Setter for IP-address of the sunNode.
+     * @param ip the ip of the device
+     */
     public void setEspIP(String ip){
         PreferenceManager.getDefaultSharedPreferences(context).edit()
                 .putString(IP, ip).apply();
         this.espIP = ip;
         requestData();
     }
+
 
     private void initListeners() {
         dataResponse.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
@@ -79,30 +89,55 @@ public class CommunicationHandler {
         simpleConnection.start();
     }
 
+    /**
+     * Sends request to sun to toggle between on and off.
+     */
     public void sendToggle() {
         request("toggle");
     }
 
+    /**
+     * Sends request to sun to go into auto mode.
+     */
     public void sendAutomation() {
         request("automation");
     }
 
+    /**
+     * Sends trigger light level to sun.
+     * @param level the level till which the sun should be on
+     */
     public void sendLevel(int level){
         request("level "+ level);
     }
 
+    /**
+     * Sends the time at which the sun should be able to turn on in auto mode.
+     * @param value
+     */
     public void sendStartTime(String value) {
         request("startTime "+ value);
     }
 
+    /**
+     * Sends the time at which the sun should be definitely of in auto mode.
+     * @param value
+     */
     public void sendEndTime(String value) {
         request("endTime "+ value);
     }
 
+    /**
+     * Sends request to sun for information about its state.
+     */
     public void requestData(){
         request("getData");
     }
 
+    /**
+     * Returns the ip-address of the sun.
+     * @return the IP-address of the sun
+     */
     public String getEspIp() {
         if (espIP == null){
             return getSavedIp();
