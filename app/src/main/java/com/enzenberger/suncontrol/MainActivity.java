@@ -1,15 +1,21 @@
 package com.enzenberger.suncontrol;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.databinding.DataBindingUtil;
 
 import android.app.Activity;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.enzenberger.suncontrol.databinding.ActivityMainBinding;
@@ -29,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements Displayable {
     private Slider lightSlider;
     private RangeSlider timeSlider;
     private EditText edittext;
+    private ImageButton automationButton;
+    private ImageButton onOffButton;
 
 
     @Override
@@ -42,8 +50,14 @@ public class MainActivity extends AppCompatActivity implements Displayable {
         initTimeSlider();
         initLightSlider();
         initGraph();
-        initCommunication();
         initEditText();
+        initButtons();
+        initCommunication();
+    }
+
+    private void initButtons() {
+        this.automationButton = (ImageButton) findViewById(R.id.button_automation);
+        this.onOffButton = (ImageButton) findViewById(R.id.button_on_off);
     }
 
     private void initEditText() {
@@ -165,5 +179,23 @@ public class MainActivity extends AppCompatActivity implements Displayable {
         level = roundToHundred(level) + 100;
         this.graphView.getViewport().setMaxY(level);
         this.lightSlider.setValueTo(level);
+    }
+
+    @Override
+    public void displayAutomation(boolean automation) {
+        if (automation){
+            this.automationButton.setImageTintList(ColorStateList.valueOf(Color.CYAN));
+        } else {
+            this.automationButton.setImageTintList(ColorStateList.valueOf(Color.GRAY));
+        }
+    }
+
+    @Override
+    public void displayStatus(boolean status) {
+        if (status) {
+            this.onOffButton.setImageTintList(ColorStateList.valueOf(Color.GREEN));
+        } else {
+            this.onOffButton.setImageTintList(ColorStateList.valueOf(Color.RED));
+        }
     }
 }

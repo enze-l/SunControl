@@ -11,4 +11,8 @@ public interface Displayable {
     void displayTimes(String startTime, String endTime);
 
     void setMaxLevel(int level);
+
+    void displayAutomation(boolean automation);
+
+    void displayStatus(boolean status);
 }

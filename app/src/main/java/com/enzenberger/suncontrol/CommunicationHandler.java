@@ -43,8 +43,10 @@ public class CommunicationHandler {
         int triggerValue = Integer.parseInt(data[1]);
         String startTime = data[2];
         String endTime = data[3];
+        boolean automation = Boolean.parseBoolean(data[4]);
+        boolean status = !data[5].equals("0");
 
-        for (int interval = 4; interval < data.length; interval++){
+        for (int interval = 6; interval < data.length; interval++){
             formattedValues.add(Double.parseDouble(data[interval]));
         }
 
@@ -52,10 +54,8 @@ public class CommunicationHandler {
         displayable.displayLevel(triggerValue);
         displayable.displayGraph(formattedValues);
         displayable.displayTimes(startTime, endTime);
-    }
-
-    private void sendMessage(String message){
-        dispenseMessage(new SimpleConnection(espIP, espPort, message));
+        displayable.displayAutomation(automation);
+        displayable.displayStatus(status);
     }
 
     private void request(String message){
@@ -68,23 +68,23 @@ public class CommunicationHandler {
     }
 
     public void sendToggle() {
-        sendMessage("toggle");
+        request("toggle");
     }
 
     public void sendAutomation() {
-        sendMessage("automation");
+        request("automation");
     }
 
     public void sendLevel(int level){
-        sendMessage("level "+ level);
+        request("level "+ level);
     }
 
     public void sendStartTime(String value) {
-        sendMessage("startTime "+ value);
+        request("startTime "+ value);
     }
 
     public void sendEndTime(String value) {
-        sendMessage("endTime "+ value);
+        request("endTime "+ value);
     }
 
     public void requestData(){
