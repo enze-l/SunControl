@@ -22,6 +22,7 @@
             android:layout_marginBottom="24dp"
             android:background="@color/transparent"
             android:onClick="onClickAutomation"
+            android:tint="@color/grey"
             android:scaleType="fitCenter"
             android:src="@drawable/outline_brightness_auto_black_48dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -37,6 +38,8 @@
             android:layout_marginBottom="24dp"
             android:background="@color/transparent"
             android:onClick="onClickLight"
+            android:tint="@color/grey"
+
             android:scaleType="fitCenter"
             android:src="@drawable/baseline_power_settings_new_black_48dp"
             app:layout_constraintBottom_toBottomOf="parent"

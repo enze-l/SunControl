@@ -46,4 +46,9 @@ public interface Displayable {
      * @param message the message that should be displayed
      */
     void displayConnectionMessage(String message);
+
+    /**
+     * Clears display of all previously set states
+     */
+    void clearDisplay();
 }

@@ -56,6 +56,7 @@ public class CommunicationHandler {
         String response = dataResponse.get();
         if (response.equals(SimpleConnection.FAIL_MESSAGE)){
             displayable.displayConnectionMessage("Connection failed. Try other ip or refresh");
+            displayable.clearDisplay();
         } else {
             String[] data = response.split("\\s");
 

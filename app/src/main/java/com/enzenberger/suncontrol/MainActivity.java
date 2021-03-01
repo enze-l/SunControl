@@ -222,4 +222,11 @@ public class MainActivity extends AppCompatActivity implements Displayable {
     public void displayConnectionMessage(String message) {
         this.failMessage.set(message);
     }
+
+    @Override
+    public void clearDisplay() {
+        this.automationButton.setImageTintList(ColorStateList.valueOf(Color.LTGRAY));
+        this.onOffButton.setImageTintList(ColorStateList.valueOf(Color.LTGRAY));
+        this.graphView.removeAllSeries();
+    }
 }
