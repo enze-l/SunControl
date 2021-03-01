@@ -225,8 +225,8 @@ public class MainActivity extends AppCompatActivity implements Displayable {
 
     @Override
     public void clearDisplay() {
-        this.automationButton.setImageTintList(ColorStateList.valueOf(Color.LTGRAY));
-        this.onOffButton.setImageTintList(ColorStateList.valueOf(Color.LTGRAY));
+        this.automationButton.setImageTintList(ColorStateList.valueOf(Color.GRAY));
+        this.onOffButton.setImageTintList(ColorStateList.valueOf(Color.GRAY));
         this.graphView.removeAllSeries();
     }
 }
