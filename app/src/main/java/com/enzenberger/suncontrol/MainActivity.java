@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements Displayable {
     private EditText ipEditText;
     private ImageButton automationButton;
     private ImageButton onOffButton;
-    public ObservableField<String> failMessage = new ObservableField<>("Hello");
+    public ObservableField<String> failMessage = new ObservableField<>("");
 
 
     @Override
