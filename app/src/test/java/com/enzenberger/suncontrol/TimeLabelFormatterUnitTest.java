@@ -20,9 +20,9 @@ public class TimeLabelFormatterUnitTest {
         TimeLabelFormatter timeLabelFormatter = new TimeLabelFormatter();
         float invalidDecimalHours = 45.0f;
 
-        String formattedValue = timeLabelFormatter.getFormattedValue(invalidDecimalHours);
-
-        assertEquals("24:00", formattedValue);
+        assertThrows(IllegalArgumentException.class, () -> {
+            timeLabelFormatter.getFormattedValue(invalidDecimalHours);
+        });
     }
 
     @Test
@@ -30,8 +30,8 @@ public class TimeLabelFormatterUnitTest {
         TimeLabelFormatter timeLabelFormatter = new TimeLabelFormatter();
         float invalidDecimalHours = -45.0f;
 
-        String formattedValue = timeLabelFormatter.getFormattedValue(invalidDecimalHours);
-
-        assertEquals("00:00", formattedValue);
+        assertThrows(IllegalArgumentException.class, () -> {
+            timeLabelFormatter.getFormattedValue(invalidDecimalHours);
+        });
     }
 }

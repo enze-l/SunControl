@@ -8,10 +8,8 @@ public class TimeLabelFormatter implements LabelFormatter {
     @NonNull
     @Override
     public String getFormattedValue(float decimalHours) {
-        if (decimalHours < 0) {
-            return "00:00";
-        } else if (decimalHours > 24) {
-            return "24:00";
+        if (decimalHours < 0 || decimalHours > 24) {
+            throw new IllegalArgumentException("not a valid time");
         }
         int hours = (int)decimalHours;
         float minuteFraction = decimalHours%1;
