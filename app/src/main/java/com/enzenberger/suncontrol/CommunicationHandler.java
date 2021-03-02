@@ -15,7 +15,6 @@ public class CommunicationHandler {
     private final Displayable displayable;
     private final Context context;
     private String espIP;
-    private final int espPort= 50000;
 
     /**
      * Class constructor.
@@ -82,6 +81,7 @@ public class CommunicationHandler {
     }
 
     private void request(String message){
+        int espPort = 50000;
         dispenseMessage(new SimpleConnection(espIP, espPort, message, dataResponse));
     }
 
@@ -114,18 +114,18 @@ public class CommunicationHandler {
 
     /**
      * Sends the time at which the sun should be able to turn on in auto mode.
-     * @param value
+     * @param time the time as a String formatted as "hh:mm"
      */
-    public void sendStartTime(String value) {
-        request("startTime "+ value);
+    public void sendStartTime(String time) {
+        request("startTime "+ time);
     }
 
     /**
      * Sends the time at which the sun should be definitely of in auto mode.
-     * @param value
+     * @param time the time as a String formatted as "hh:mm"
      */
-    public void sendEndTime(String value) {
-        request("endTime "+ value);
+    public void sendEndTime(String time) {
+        request("endTime "+ time);
     }
 
     /**
